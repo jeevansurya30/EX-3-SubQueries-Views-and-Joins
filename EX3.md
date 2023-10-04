@@ -69,45 +69,73 @@ INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (40, 'OPERATIONS', 'BOSTON');
 
 
 ### QUERY:
-
+```sql
+CREATE VIEW details AS SELECT ENAME FROM EMP WHERE SALARY >(select SALARY from EMP where EMPNO=7566);
+```
 
 ### OUTPUT:
+![image](https://github.com/jeevansurya30/EX-3-SubQueries-Views-and-Joins/assets/129417865/3f1b24e7-546a-44c0-a11f-e467957bcdcd)
+
+
 
 ### Q2) List the ename,job,sal of the employee who get minimum salary in the company.
 
 ### QUERY:
-
+```sql
+ CREATE VIEW minimum AS select ENAME,JOB,SALARY from EMP where SALARY =(select MIN(SALARY) from EMP);
+```
 
 ### OUTPUT:
+![image](https://github.com/jeevansurya30/EX-3-SubQueries-Views-and-Joins/assets/129417865/485a8068-20c8-482b-940c-2a0ccda772ef)
+
+
 
 ### Q3) List ename, job of the employees who work in deptno 10 and his/her job is any one of the job in the department ‘SALES’.
 
 ### QUERY:
-
+```sql
+select ENAME,JOB from EMP where  DEPTNO=10 AND JOB='SALESMAN';
+```
 
 ### OUTPUT:
+![image](https://github.com/jeevansurya30/EX-3-SubQueries-Views-and-Joins/assets/129417865/f58e0816-8a1e-4c03-b915-86325e9a2a79)
+
 
 
 ### Q4) Create a view empv5 (for the table emp) that contains empno, ename, job of the employees who work in dept 10.
 
 ### QUERY:
-
+```sql
+create view empv5 as select EMPNO,ENAME,JOB from EMP where DEPTNO=10;
+```
 
 ### OUTPUT:
+![image](https://github.com/jeevansurya30/EX-3-SubQueries-Views-and-Joins/assets/129417865/e951baf6-90bc-4a1e-9a62-517510ceee0d)
+
 
 ### Q5) Create a view with column aliases empv30 that contains empno, ename, sal of the employees who work in dept 30. Also display the contents of the view.
 
 ### QUERY:
-
+```sql
+create view empv30 AS select EMPNO,ENAME,SALARY from EMP where DEPTNO=30;
+```
 
 ### OUTPUT:
+![image](https://github.com/jeevansurya30/EX-3-SubQueries-Views-and-Joins/assets/129417865/f86461b2-5c31-48e3-ba54-6750f01afa7a)
+
 
 ### Q6) Update the view empv5 by increasing 10% salary of the employees who work as ‘CLERK’. Also confirm the modifications in emp table
 
 ### QUERY:
+```sql
+update EMP set SALARY=SALARY*1.1 WHERE JOB='clerk';
 
+create view empv5 as select EMPNO,ENAME,SALARY,JOB from EMP;
+```
 
 ### OUTPUT:
+![image](https://github.com/jeevansurya30/EX-3-SubQueries-Views-and-Joins/assets/129417865/ef3ed403-4542-4a31-8f0b-f579f5fc41eb)
+
 
 ## Create a Customer1 Table
 ```sql
@@ -140,28 +168,47 @@ INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5003, 'Lauson
 ### Q7) Write a SQL query to find the salesperson and customer who reside in the same city. Return Salesman, cust_name and city.
 
 ### QUERY:
-
+```sql
+select s.name,c.cust_name,s.city from salesman1 as s ,customer1 as c where s.city=c.city;
+```
 
 ### OUTPUT:
+![image](https://github.com/jeevansurya30/EX-3-SubQueries-Views-and-Joins/assets/129417865/e07feda0-df5d-405a-aa0b-ddf53f3ba362)
+
 
 ### Q8) Write a SQL query to find salespeople who received commissions of more than 13 percent from the company. Return Customer Name, customer city, Salesman, commission.
 
 
 ### QUERY:
-
+```sql
+select s.name,c.cust_name,c.city,s.commission from salesman1 as s inner join customer1 as c on s.city=c.city where s.commission>0.13;
+```
 
 ### OUTPUT:
+![image](https://github.com/jeevansurya30/EX-3-SubQueries-Views-and-Joins/assets/129417865/a89103b4-5c75-49a4-a9fd-0116d0cd9ff4)
+
 
 ### Q9) Perform Natural join on both tables
 
 ### QUERY:
-
+```sql
+ select s.name,c.cust_name,c.city,s.commission from salesman1 as s natural join customer1 as c where s.commission>0.13;
+```
 
 ### OUTPUT:
+![image](https://github.com/jeevansurya30/EX-3-SubQueries-Views-and-Joins/assets/129417865/546f9166-ca87-4e96-b12e-66eb10aeac1a)
+
+
 
 ### Q10) Perform Left and right join on both tables
 
 ### QUERY:
+```sql
+select s.name,c.cust_name,c.city,s.commission from salesman1 as s left join customer1 as c on s.salesman_id=c.salesman_id where s.commission>0.13;
 
+select s.name,c.cust_name,c.city,s.commission from salesman1 as s right join customer1 as c on s.salesman_id=c.salesman_id where s.commission>0.13;
+```
 
 ### OUTPUT:
+![image](https://github.com/jeevansurya30/EX-3-SubQueries-Views-and-Joins/assets/129417865/a19e949c-97cb-4dbf-87cb-5b1558b42ea4)
+
